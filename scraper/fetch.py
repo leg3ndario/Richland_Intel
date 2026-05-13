@@ -376,29 +376,118 @@ _CITY_ANCHOR  = re.compile(
 )
 
 
+# ── Address quality filters ───────────────────────────────────────────────────
+
+# Addresses that appear in Columbia Star notices as attorney/firm contact info,
+# not as subject property addresses. Normalised to UPPER, stripped of punctuation.
+_FALSE_ADDR_BLOCKLIST: set[str] = {
+    # Brock & Scott / various foreclosure attorneys
+    "3800 FERNANDINA ROAD SUITE 110",
+    "3800 FERNANDINA RD SUITE 110",
+    # Hutchens Law Firm
+    "240 STONERIDGE DRIVE SUITE 400",
+    "240 STONERIDGE DR SUITE 400",
+    "240 STONERIDGE DRIVE SUITE400",
+    "PO BOX 8237",
+    "P O BOX 8237",
+    # Bell Carrington Price & Gregg
+    "339 HEYWARD STREET 2ND FLOOR",
+    "339 HEYWARD ST 2ND FLOOR",
+    # Cobb Hammett / Scott & Corley
+    "712 CALHOUN STREET SUITE B",
+    "712 CALHOUN ST SUITE B",
+    "4500 FORT JACKSON BLVD SUITE 335",
+    "4500 FORT JACKSON BLVD SUITE335",
+    # McMichael Taylor Gray / Robertson Anschutz
+    "3550 ENGINEERING DRIVE SUITE 260",
+    "13010 MORRIS ROAD SUITE 450",
+    # Crawford & von Keller
+    "1640 ST JULIAN PLACE",
+    "PO BOX 4216",
+    # Foundation Legal Group / Hutchens shared
+    "240 STONERIDGE DRIVE",
+    # Pyatt Law Firm
+    "POST OFFICE BOX 12041",
+    # Various plaintiff attorney offices that recur
+    "1800 ST JULIAN PLACE SUITE 407",
+    "1800 ST JULIAN PL SUITE 407",
+    "1416 LAUREL STREET SUITE A",
+    "1416 LAUREL ST SUITE A",
+    "1201 MAIN STREET SUITE 1450",
+    "1201 MAIN ST SUITE 1450",
+    "1332 MAIN STREET STE 225",
+    "2638 TWO NOTCH RD SUITE 200",
+    "2638 TWO NOTCH ROAD SUITE 200",
+    "1735 ST JULIAN PL STE 103",
+    "1735 ST JULIAN PLACE STE 103",
+    "712 RICHLAND STREET SUITE E",
+    "4500 FORT JACKSON BLVD",
+}
+
+def _norm_addr_key(addr: str) -> str:
+    """Normalise an address for blocklist lookup."""
+    return re.sub(r"[.,#\-]+", " ", addr.upper().strip())
+
+
+def _is_commercial_address(street: str) -> bool:
+    """
+    Return True if the street looks like a commercial/office address
+    rather than a residential property.  Checks for Suite, Floor, Ste,
+    P.O. Box, and known attorney office patterns.
+    """
+    s = street.upper()
+    # Suite / floor / unit markers strongly indicate a commercial office
+    if re.search(r"\b(SUITE|STE\.?|FLOOR|FL\.?|UNIT\s+\w{1,3}|APT\.?\s+\w)\b", s):
+        # Exception: residential unit addresses like "APT 2B" or "UNIT 12"
+        # are fine for residential; but "Suite 400", "2nd Floor" are not.
+        # Reject Suite/Floor unconditionally; APT is ok for residential.
+        if re.search(r"\b(SUITE|STE\.?|FLOOR|FL\.?)\b", s):
+            return True
+    # P.O. Box
+    if re.search(r"\bP\.?\s*O\.?\s*BOX\b", s):
+        return True
+    # Blocklist lookup
+    key = _norm_addr_key(street)
+    for blocked in _FALSE_ADDR_BLOCKLIST:
+        if blocked in key or key in blocked:
+            return True
+    return False
+
+
 def _addr_from_text(text: str) -> tuple[str, str, str, str] | None:
     """
     Anchor-first address parser.
     1. Find CITY SC ZIP using the known-city list.
     2. Walk backward to find the nearest house number, grab street through to city.
+    3. Reject commercial/office addresses (Suite, Floor, P.O. Box, known firm addrs).
     Returns (street, city, "SC", zip5) or None.
     """
     text = re.sub(r"\s+", " ", text).strip()
-    m = _CITY_ANCHOR.search(text)
-    if not m:
-        return None
-    city    = m.group(1).strip()
-    zipcode = m.group(2)[:5]
-    before  = text[:m.start()].strip(" ,")
-    # Find the last standalone house number before the city
-    nums = list(re.finditer(r"(?<!\w)(\d{1,5})(?=\s+[A-Za-z])", before))
-    if not nums:
-        return None
-    street = before[nums[-1].start():].strip(" ,")
-    street = re.sub(r"\s*[;:]+\s*$", "", street).strip(" ,")
-    if not street or len(street) < 4:
-        return None
-    return street, city, "SC", zipcode
+
+    # Try every city anchor match, not just the first, so we can skip false ones
+    for m in _CITY_ANCHOR.finditer(text):
+        city    = m.group(1).strip()
+        zipcode = m.group(2)[:5]
+        before  = text[:m.start()].strip(" ,")
+
+        # Find the last standalone house number before the city
+        nums = list(re.finditer(r"(?<!\w)(\d{1,5})(?=\s+[A-Za-z])", before))
+        if not nums:
+            continue
+
+        street = before[nums[-1].start():].strip(" ,")
+        street = re.sub(r"\s*[;:]+\s*$", "", street).strip(" ,")
+
+        if not street or len(street) < 4:
+            continue
+
+        # Reject commercial / attorney office addresses
+        if _is_commercial_address(street):
+            continue
+
+        return street, city, "SC", zipcode
+
+    return None
 
 
 def extract_property_address(text: str) -> tuple[str, str, str, str]:
