@@ -1108,6 +1108,99 @@ class ColumbiaStarFetcher:
 # NOTICE PARSER  (post → individual records)
 # ══════════════════════════════════════════════════════════════════════════════
 
+# ── Non-real-estate notice patterns (excluded entirely) ──────────────────────
+# These match notice types that appear in the Columbia Star public notices
+# section but have nothing to do with real property.
+_EXCLUDE_PATTERNS = re.compile(
+    r"NOTICE\s+OF\s+(?:UNCLAIMED\s+VEHICLE|ABANDONED\s+VEHICLE|PUBLIC\s+SALE\s+OF\s+VEHICLE)"
+    r"|UNCLAIMED\s+VEHICLE"
+    r"|VEHICLE\s+(?:AUCTION|LIEN\s+SALE|STORAGE\s+LIEN)"
+    r"|STORAGE\s+AUCTION"          # self-storage auctions
+    r"|RED\s+DOOR\s+STORAGE"
+    r"|EXTRA\s+SPACE\s+STORAGE"
+    r"|LIFE\s+STORAGE"
+    r"|STORAGE\s+EXPRESS"
+    r"|PUBLIC\s+STORAGE"
+    r"|NOTICE\s+OF\s+APPLICATION.*BEER"   # liquor license applications
+    r"|NOTICE\s+OF\s+APPLICATION.*WINE"
+    r"|INTENDS\s+TO\s+APPLY.*DEPARTMENT\s+OF\s+REVENUE.*LICENSE"
+    r"|ABL[-\s]?201"                       # SC ABC license form
+    r"|SALE\s+OF\s+BEER\s+AND\s+WINE"
+    r"|UNCLAIMED\s+PROPERTY"
+    r"|ABANDONED\s+PROPERTY\s+ACT"
+    r"|NOTICE\s+OF\s+DISSOLUTION"          # business dissolutions (non-property)
+    r"|VIN\s*#?\s*[A-Z0-9]{10,17}"        # vehicle ID number = vehicle notice
+    r"|REPAIR\s+(?:BILL|LIEN).*VEHICLE"
+    r"|TOWING.*VEHICLE"
+    r"|WRECKER\s+LIEN",
+    re.IGNORECASE,
+)
+
+# Positive real-estate signals — at least one must be present for a record
+# to pass. This prevents generic "lien / notice" catch-all records from
+# slipping through when there's no property connection.
+_RE_SIGNALS = re.compile(
+    r"REAL\s+(?:ESTATE|PROPERTY)"
+    r"|MORTGAGE"
+    r"|FORECLOS"
+    r"|LIS\s+PENDENS"
+    r"|DEED"
+    r"|PARCEL"
+    r"|TMS[#\s/]"
+    r"|PIN[#\s:]"
+    r"|PLAT\s+BOOK"
+    r"|REGISTER\s+OF\s+(?:DEEDS|MESNE)"
+    r"|REGISTER\s+OF\s+MESNE"
+    r"|MASTER\s+IN\s+EQUITY"
+    r"|MASTER['']?S\s+SALE"
+    r"|COURT\s+OF\s+COMMON\s+PLEAS"
+    r"|LOT\s+\d"                     # "Lot 12, Block B" legal descriptions
+    r"|BLOCK\s+[A-Z\d]"
+    r"|SUBDIVISION"
+    r"|MECHANIC'?S?\s+LIEN"          # mechanic liens attach to real property
+    r"|MATERIALMAN'?S?\s+LIEN"
+    r"|HOA\b"
+    r"|HOMEOWNER'?S?\s+ASSOCIATION"
+    r"|PROPERTY\s+OWNERS'\s+ASSOCIATION"
+    r"|PROBATE\s+COURT"
+    r"|ESTATE\s+OF\s+[A-Z]"          # probate estates tied to real property
+    r"|NOTICE\s+TO\s+CREDITORS"
+    r"|TAX\s+(?:SALE|DEED|LIEN|COLLECTOR|DELINQUENT)"
+    r"|DELINQUENT\s+TAX"
+    r"|INTERNAL\s+REVENUE.*REAL"
+    r"|JUDGMENT.*REAL"
+    r"|PROPERTY\s+ADDRESS\s*:",
+    re.IGNORECASE,
+)
+
+# Doc types that are always real-estate — skip the signal check for these
+_ALWAYS_RE_TYPES = {"LP", "NOFC", "TAXDEED", "JUD", "CCJ", "LNCORPTX",
+                    "LNIRS", "LNFED", "LNMECH", "LNHOA", "RELLP", "NOC"}
+
+
+def is_real_estate_notice(block: str, doc_type: str) -> bool:
+    """
+    Return True if this notice block is related to real property.
+
+    Rejects: vehicle/storage auctions, liquor licence apps, business
+             dissolutions, and any generic "lien/notice" that has no
+             real-property signal in the text.
+    """
+    upper = block.upper()
+
+    # Hard exclude — non-real-estate notice types
+    if _EXCLUDE_PATTERNS.search(upper):
+        return False
+
+    # Doc types that are always real estate — no further check needed
+    if doc_type in _ALWAYS_RE_TYPES:
+        return True
+
+    # For catch-all types (LN, PRO, DRJUD, MEDLN) require at least one
+    # positive real-estate signal in the notice text
+    return bool(_RE_SIGNALS.search(upper))
+
+
 _EMPTY_RECORD = {
     "doc_num":      "",
     "doc_type":     "",
@@ -1136,6 +1229,7 @@ def parse_post_into_records(post: dict) -> list[dict]:
     """
     Parse a single WordPress post object into a list of lead records.
     Each distinct notice block within the post becomes one record.
+    Only real-estate-related notices are kept.
     """
     records   = []
     post_url  = post.get("link", "")
@@ -1153,6 +1247,11 @@ def parse_post_into_records(post: dict) -> list[dict]:
     for block in blocks:
         try:
             doc_type, cat, label = classify_notice(block)
+
+            # ── Real-estate filter ────────────────────────────────────────────
+            if not is_real_estate_notice(block, doc_type):
+                continue
+
             ca_num               = extract_ca_number(block)
             street, city, state, zipcode = extract_property_address(block)
             owner, grantee       = extract_parties(block, doc_type)
@@ -1180,7 +1279,7 @@ def parse_post_into_records(post: dict) -> list[dict]:
                 "prop_state":   state or STATE,
                 "prop_zip":     zipcode,
                 "clerk_url":    post_url,
-                "_tms":         tms,   # internal – used for parcel lookup; removed later
+                "_tms":         tms,
             })
             records.append(rec)
 
