@@ -1,0 +1,14 @@
+# ... your existing generation steps ...
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Upload to DealMachine
+      env:
+        DEALMACHINE_API_KEY: ${{ secrets.DEALMACHINE_API_KEY }}
+      run: python upload_to_dealmachine.py
