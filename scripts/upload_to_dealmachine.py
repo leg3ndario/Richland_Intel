@@ -7,26 +7,22 @@ import re
 # Configuration
 API_KEY = os.getenv('DEALMACHINE_API_KEY')
 CSV_FILE = 'data/leads_ghl_export.csv' 
-BASE_URL = "https://api.dealmachine.com/public/v1/leads/" # Added trailing slash
-LIST_ID = 1254885 
+BASE_URL = "https://api.dealmachine.com/public/v1/leads"
+LIST_ID = "1254885" # Richland_Intel
 
 def clean_address(addr):
+    # Strip parentheses and standardize units
     addr = re.sub(r'\(.*?\)', '', addr)
     addr = re.sub(r'\bUNIT\b', '#', addr, flags=re.IGNORECASE)
     return addr.strip().strip(',')
 
 def upload_leads():
     if not API_KEY:
-        print("❌ Error: DEALMACHINE_API_KEY environment variable is empty.")
-        return
-
-    if not os.path.exists(CSV_FILE):
-        print(f"❌ Error: {CSV_FILE} not found.")
+        print("❌ API Key missing")
         return
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json",
         "Accept": "application/json"
     }
 
@@ -35,8 +31,7 @@ def upload_leads():
         
         for row in reader:
             raw_addr = row.get('Property Address', '').strip()
-            
-            # Basic junk filtering
+            # Basic validation: must start with a digit and be reasonably short
             if not raw_addr or not raw_addr[0].isdigit() or len(raw_addr) > 120:
                 continue
 
@@ -44,50 +39,53 @@ def upload_leads():
             city = row.get('Property City', 'Columbia').strip()
             zip_code = row.get('Property Zip', '').strip()
             
+            # Initial Creation Payload (JSON)
             payload = {
                 "address": addr,
                 "city": city,
                 "state": "SC",
                 "zip": zip_code,
                 "skip_trace": True,
-                "lists": [LIST_ID]
+                "lists": [int(LIST_ID)]
             }
 
             try:
                 # 1. ATTEMPT TO CREATE (POST)
-                response = requests.post(BASE_URL, json=payload, headers=headers)
+                response = requests.post(f"{BASE_URL}/", json=payload, headers=headers)
                 res_data = response.json()
                 
+                # Check for ID and Error message
                 lead_id = res_data.get('data', {}).get('id') if isinstance(res_data.get('data'), dict) else None
-                error_msg = res_data.get('error', {}).get('message', '') if isinstance(res_data.get('error'), dict) else str(res_data.get('error'))
+                error_info = res_data.get('error', {})
+                error_msg = error_info.get('message', '') if isinstance(error_info, dict) else str(error_info)
 
                 if response.status_code in [200, 201] and lead_id:
                     print(f"✅ Added: {addr}")
                 
-                elif "already added" in error_msg.lower() or response.status_code == 200:
-                    # 2. ALREADY EXISTS? FETCH THE ID AND UPDATE (PUT)
-                    # Use the ID from the response or look for it
-                    existing_id = res_data.get('data', {}).get('id')
+                elif "already added" in error_msg.lower() or lead_id:
+                    # 2. IF EXISTS, USE THE ADD-TO-LIST ENDPOINT (FORM DATA)
+                    # Use lead_id from the response
+                    target_id = lead_id or res_data.get('data', {}).get('id')
                     
-                    if existing_id:
-                        # Constructing the PUT URL with a trailing slash
-                        update_url = f"{BASE_URL}{existing_id}/"
-                        update_payload = {"lists": [LIST_ID]}
+                    if target_id:
+                        add_to_list_url = f"{BASE_URL}/{target_id}/add-to-list"
+                        # Documentation shows this specific endpoint uses Form Data (multipart/form-data)
+                        form_data = {'list_ids': LIST_ID}
                         
-                        update_res = requests.put(update_url, json=update_payload, headers=headers)
+                        update_res = requests.post(add_to_list_url, data=form_data, headers=headers)
                         
                         if update_res.status_code == 200:
-                            print(f"🔄 Updated: {addr} (Moved to List {LIST_ID})")
+                            print(f"🔄 Synced: {addr} -> Richland_Intel")
                         else:
-                            print(f"⚠️ Found but couldn't update: {addr} | {update_res.text}")
+                            print(f"⚠️ Found {addr}, but List Sync failed: {update_res.text}")
                     else:
-                        print(f"➖ Skipped: {addr} (Already in DM, No ID returned)")
+                        print(f"➖ Skipped: {addr} (Could not retrieve ID)")
                 
                 else:
                     print(f"❌ Failed: {addr} | {error_msg}")
             
             except Exception as e:
-                print(f"⚠️ Error: {addr} | {str(e)}")
+                print(f"⚠️ System Error: {addr} | {str(e)}")
 
             time.sleep(0.4)
 
