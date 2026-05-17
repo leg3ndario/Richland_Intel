@@ -22,10 +22,10 @@ jobs:
 
       - name: Verify CSV exists
         run: |
-          if [ -f "leads.csv" ]; then
+          if [ -f "data/leads_ghl_export.csv" ]; then
             echo "data/leads_ghl_export.csv found, proceeding..."
           else
-            echo "leads.csv NOT found in data directory!"
+            echo "leads_ghl_export.csv NOT found in data directory!"
             exit 1
           fi
 
