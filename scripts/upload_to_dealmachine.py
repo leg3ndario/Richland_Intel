@@ -5,7 +5,7 @@ import time
 
 # Configuration
 API_KEY = os.getenv('DEALMACHINE_API_KEY')
-CSV_FILE = 'leads.csv' 
+CSV_FILE = 'data/leads_ghl_export.csv' 
 URL = "https://api.dealmachine.com/public/v1/leads"
 
 def upload_leads():
