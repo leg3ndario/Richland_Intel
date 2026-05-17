@@ -2,7 +2,7 @@ name: Scrape Richland County SC Leads (Columbia Star)
 
 on:
   schedule:
-    - cron: "0 7 * * *"    # 07:00 UTC daily (newspaper publishes weekly on Thursdays)
+    - cron: "0 7 * * *"
   workflow_dispatch:
     inputs:
       lookback_days:
@@ -51,6 +51,12 @@ jobs:
           LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '7' }}
         run: python scraper/fetch.py
 
+      # --- ADDED DEALMACHINE UPLOAD HERE ---
+      - name: Upload to DealMachine
+        env:
+          DEALMACHINE_API_KEY: ${{ secrets.DEALMACHINE_API_KEY }}
+        run: python scripts/upload_to_dealmachine.py
+
       - name: Commit & push updated data
         run: |
           git config user.name  "github-actions[bot]"
@@ -69,8 +75,6 @@ jobs:
     runs-on: ubuntu-22.04
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-
     steps:
       - name: Checkout (after data push)
         uses: actions/checkout@v4
@@ -85,17 +89,6 @@ jobs:
         with:
           path: dashboard/
 
-      # ... your esisting generation steps ...
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Upload to DealMachine
-        env:
-          DEALMACHINE_API_KEY: ${{ secrets.DEALMACHINE_API_KEY }}
-        run: python scripts/upload_to_dealmachine.py
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
