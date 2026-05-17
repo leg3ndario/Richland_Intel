@@ -1,0 +1,26 @@
+name: Get DealMachine Lists
+
+on:
+  # This allows you to run the test manually from the Actions tab
+  workflow_dispatch: 
+
+jobs:
+  test-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Upload Script
+        env:
+          DEALMACHINE_API_KEY: ${{ secrets.DEALMACHINE_API_KEY }}
+        run: python scripts/get_list_ids.py
