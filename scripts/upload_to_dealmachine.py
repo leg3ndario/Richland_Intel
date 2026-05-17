@@ -13,50 +13,53 @@ def upload_leads():
         print(f"Error: {CSV_FILE} not found.")
         return
 
+    # Check if API_KEY is actually being pulled from secrets
+    if not API_KEY:
+        print("Error: DEALMACHINE_API_KEY environment variable is not set.")
+        return
+
     with open(CSV_FILE, mode='r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         
         for row in reader:
-            # Match the documentation's address logic
-            # Use .strip() to ensure no leading/trailing spaces mess with the geocoder
             addr = row['Property Address'].strip()
             city = row['Property City'].strip()
             state = row['Property State'].strip()
             zip_code = row['Property Zip'].strip()
-            full_addr = f"{addr}, {city}, {state} {zip_code}"
             
-            # Using 'data=' instead of 'json=' to send as Form Data
+            # Using the "Parsed Address" option from their docs
             payload = {
                 "address": addr,
                 "address2": "",
                 "city": city,
                 "state": state,
                 "zip": zip_code,
-                "full_address": full_addr,
-                "skip_trace": "1" # Some Form APIs prefer "1" for true
+                "skip_trace": True
             }
             
+            # THE FIX: Standard Bearer Token Authorization
             headers = {
-                "x-api-key": API_KEY
-                # Note: 'requests' sets the correct Content-Type automatically for Form data
+                "Authorization": f"Bearer {API_KEY}",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             }
 
             try:
-                # We use data=payload for Form Data
-                response = requests.post(URL, data=payload, headers=headers)
-                json_response = response.json()
+                # Switching back to json=payload for the Bearer API
+                response = requests.post(URL, json=payload, headers=headers)
                 
                 if response.status_code in [200, 201]:
-                    # The API likely returns a dictionary with 'data'
-                    # Let's print the whole response briefly to be sure
+                    json_response = response.json()
                     print(f"Success: {addr} | Response: {json_response}")
+                elif response.status_code == 401:
+                    print(f"Failed: 401 Unauthorized. Double-check your API Key in GitHub Secrets.")
+                    break # Stop the loop if the key is invalid
                 else:
                     print(f"Failed {addr}: {response.status_code} - {response.text}")
             
             except Exception as e:
                 print(f"Error processing {addr}: {str(e)}")
 
-            # Short pause to respect rate limits
             time.sleep(0.5)
 
 if __name__ == "__main__":
