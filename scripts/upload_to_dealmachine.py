@@ -11,10 +11,22 @@ BASE_URL = "https://api.dealmachine.com/public/v1/leads"
 LIST_ID = "1254885" 
 
 def clean_address(addr):
-    # Remove (Zip) and handle "Unit" -> "#"
     addr = re.sub(r'\(.*?\)', '', addr)
     addr = re.sub(r'\bUNIT\b', '#', addr, flags=re.IGNORECASE)
     return addr.strip().strip(',')
+
+def get_lead_id_by_address(address, headers):
+    """Searches for an existing lead ID by street address."""
+    search_url = f"{BASE_URL}/"
+    params = {"search": address, "per_page": 1}
+    try:
+        res = requests.get(search_url, params=params, headers=headers)
+        data = res.json().get('data', [])
+        if isinstance(data, list) and len(data) > 0:
+            return data[0].get('id')
+    except:
+        return None
+    return None
 
 def upload_leads():
     if not API_KEY:
@@ -38,7 +50,6 @@ def upload_leads():
             city = row.get('Property City', 'Columbia').strip()
             zip_code = row.get('Property Zip', '').strip()
             
-            # Initial Creation Payload (JSON)
             payload = {
                 "address": addr,
                 "city": city,
@@ -49,42 +60,39 @@ def upload_leads():
             }
 
             try:
-                # 1. ATTEMPT TO CREATE (POST)
+                # 1. ATTEMPT TO CREATE
                 response = requests.post(f"{BASE_URL}/", json=payload, headers=headers)
                 res_json = response.json()
                 
-                # --- ROBUST DATA EXTRACTION ---
-                # Handle cases where API returns a list or a dict
-                lead_data = {}
-                if isinstance(res_json, list) and len(res_json) > 0:
-                    lead_data = res_json[0]
-                elif isinstance(res_json, dict):
-                    lead_data = res_json.get('data', {})
-                    if isinstance(lead_data, list) and len(lead_data) > 0:
-                        lead_data = lead_data[0]
-                
-                error_info = res_json.get('error', {}) if isinstance(res_json, dict) else {}
-                error_msg = error_info.get('message', '') if isinstance(error_info, dict) else str(error_info)
+                # Check for existing ID in response
+                lead_data = res_json.get('data', {})
+                if isinstance(lead_data, list) and len(lead_data) > 0:
+                    lead_data = lead_data[0]
                 
                 lead_id = lead_data.get('id') if isinstance(lead_data, dict) else None
+                error_info = res_json.get('error', {}) if isinstance(res_json, dict) else {}
+                error_msg = error_info.get('message', '') if isinstance(error_info, dict) else str(error_info)
 
-                # 2. EVALUATE OUTCOME
-                if response.status_code in [200, 201] and lead_id:
-                    print(f"✅ Added: {addr}")
-                
-                elif ("already added" in error_msg.lower() or lead_id) and lead_id:
-                    # 3. IF ALREADY EXISTS, FORCE TO LIST (FORM DATA)
-                    # Documentation: /public/v1/leads/:lead_id/add-to-list
-                    add_url = f"{BASE_URL}/{lead_id}/add-to-list"
-                    form_payload = {"list_ids": LIST_ID}
+                # 2. IF ALREADY EXISTS OR SUCCESS
+                if (response.status_code in [200, 201] and lead_id) or "already added" in error_msg.lower():
                     
-                    # Note: We use data= (Form Data) here to match DM docs
-                    update_res = requests.post(add_url, data=form_payload, headers=headers)
-                    
-                    if update_res.status_code == 200:
-                        print(f"🔄 Synced: {addr} -> Richland_Intel")
+                    # If we don't have the ID from the POST, search for it
+                    target_id = lead_id
+                    if not target_id:
+                        target_id = get_lead_id_by_address(addr, headers)
+
+                    if target_id:
+                        # 3. FORCE TO LIST (FORM DATA)
+                        add_url = f"{BASE_URL}/{target_id}/add-to-list"
+                        # Use data= for multipart/form-data as per your documentation
+                        update_res = requests.post(add_url, data={'list_ids': LIST_ID}, headers=headers)
+                        
+                        if update_res.status_code == 200:
+                            print(f"🔄 Synced: {addr} -> Richland_Intel")
+                        else:
+                            print(f"✅ Added/Exists: {addr} (List sync skipped)")
                     else:
-                        print(f"⚠️ Found {addr}, but List Sync failed.")
+                        print(f"➖ Skipped: {addr} (Already in DM, ID not found)")
                 
                 else:
                     print(f"❌ Failed: {addr} | {error_msg}")
@@ -92,7 +100,7 @@ def upload_leads():
             except Exception as e:
                 print(f"⚠️ System Error: {addr} | {str(e)}")
 
-            time.sleep(0.4)
+            time.sleep(0.5)
 
 if __name__ == "__main__":
     upload_leads()
