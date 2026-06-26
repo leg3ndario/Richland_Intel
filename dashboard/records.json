@@ -1,13 +1,13 @@
 {
-  "fetched_at": "2026-06-25T10:18:06.725269+00:00",
+  "fetched_at": "2026-06-26T10:25:48.009394+00:00",
   "source": "The Columbia Star \u2013 Public Notices (Richland County SC)",
   "source_url": "https://www.thecolumbiastar.com/category/public-notices/",
   "date_range": {
-    "from": "06/18/2026",
-    "to": "06/25/2026"
+    "from": "06/19/2026",
+    "to": "06/26/2026"
   },
-  "total": 264,
-  "with_address": 172,
+  "total": 270,
+  "with_address": 176,
   "records": [
     {
       "doc_num": "2026-CP-40-00832",
@@ -27,7 +27,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Tax delinquency",
         "Probate filing",
@@ -114,6 +114,56 @@
       "score": 65
     },
     {
+      "doc_num": "2026-CP-40-02462",
+      "doc_type": "NOFC",
+      "filed": "",
+      "cat": "preforeclosure",
+      "cat_label": "Notice of Foreclosure",
+      "owner": "Any heirs-at-law or devisees of Scottie Chestnut, Sr., their heirs, Personal Representatives, Administrators, Successors",
+      "grantee": "SUMMONS AND NOTICES (Non-Jury) FORECLOSURE OF REAL ESTATE MORTGAGE STATE OF SOUTH CAROLINA COUNTY OF RICHLAND IN THE COU",
+      "amount": null,
+      "legal": "",
+      "prop_address": "",
+      "prop_city": "Columbia",
+      "prop_state": "SC",
+      "prop_zip": "",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
+      "flags": [
+        "Tax delinquency",
+        "Probate filing"
+      ],
+      "score": 50
+    },
+    {
+      "doc_num": "2026-CP-40-01782",
+      "doc_type": "PRO",
+      "filed": "",
+      "cat": "probate",
+      "cat_label": "Probate / Estate",
+      "owner": "ORDER APPOINTING GUARDIAN AD LITEM NISI AND ATTORNEY STATE OF SOUTH CAROLINA COUNTY OF RICHLAND IN THE COURT OF COMMON P",
+      "grantee": "KAYLA JENKINS, AS HEIR AT LAW OF JACQUELINE JENKINS, DECEASED, AND ANY OTHER HEIRS-AT-LAW OR DISTRIBUTEES OR PERSONAL RE",
+      "amount": null,
+      "legal": "",
+      "prop_address": "",
+      "prop_city": "Columbia",
+      "prop_state": "SC",
+      "prop_zip": "",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
+      "flags": [
+        "Tax delinquency",
+        "Probate filing"
+      ],
+      "score": 50
+    },
+    {
       "doc_num": "2026CP4002878",
       "doc_type": "LP",
       "filed": "",
@@ -131,7 +181,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Tax delinquency",
         "Probate filing"
@@ -556,7 +606,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [
         "Tax delinquency"
       ],
@@ -580,7 +630,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Tax delinquency"
       ],
@@ -751,7 +801,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [
         "Probate filing"
       ],
@@ -775,7 +825,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [
         "Probate filing"
       ],
@@ -799,7 +849,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [
         "Probate filing"
       ],
@@ -823,7 +873,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [
         "Probate filing"
       ],
@@ -847,7 +897,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Probate filing"
       ],
@@ -871,7 +921,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Probate filing"
       ],
@@ -895,7 +945,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Probate filing"
       ],
@@ -919,7 +969,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Probate filing"
       ],
@@ -943,7 +993,31 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
+      "flags": [
+        "Probate filing"
+      ],
+      "score": 20
+    },
+    {
+      "doc_num": "",
+      "doc_type": "PRO",
+      "filed": "",
+      "cat": "probate",
+      "cat_label": "Probate / Estate",
+      "owner": "",
+      "grantee": "",
+      "amount": null,
+      "legal": "",
+      "prop_address": "1310 BLYTHEWOOD RD.",
+      "prop_city": "BLYTHEWOOD",
+      "prop_state": "SC",
+      "prop_zip": "29016",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/notice-to-creditors-of-estates-888/",
       "flags": [
         "Probate filing"
       ],
@@ -1783,7 +1857,31 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
+      "flags": [
+        "Multiple liens"
+      ],
+      "score": 15
+    },
+    {
+      "doc_num": "",
+      "doc_type": "LN",
+      "filed": "",
+      "cat": "lien",
+      "cat_label": "Lien / Notice",
+      "owner": "",
+      "grantee": "",
+      "amount": null,
+      "legal": "",
+      "prop_address": "2115 Dupont Drive",
+      "prop_city": "Columbia",
+      "prop_state": "SC",
+      "prop_zip": "29223",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Multiple liens"
       ],
@@ -1807,7 +1905,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Multiple liens"
       ],
@@ -1831,7 +1929,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Multiple liens"
       ],
@@ -1855,31 +1953,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
-      "flags": [
-        "Multiple liens"
-      ],
-      "score": 15
-    },
-    {
-      "doc_num": "19116-02-02",
-      "doc_type": "LN",
-      "filed": "",
-      "cat": "lien",
-      "cat_label": "Lien / Notice",
-      "owner": "",
-      "grantee": "",
-      "amount": 102990.0,
-      "legal": "Lot No. Forty- Five (45), Block \u201cO\u201d on a plat of East Pines by William R",
-      "prop_address": "2102 Bedford Way",
-      "prop_city": "Columbia",
-      "prop_state": "SC",
-      "prop_zip": "29209",
-      "mail_address": "",
-      "mail_city": "",
-      "mail_state": "SC",
-      "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [
         "Multiple liens"
       ],
@@ -1899,6 +1973,30 @@
       "prop_city": "COLUMBIA",
       "prop_state": "SC",
       "prop_zip": "29203",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
+      "flags": [
+        "Multiple liens"
+      ],
+      "score": 15
+    },
+    {
+      "doc_num": "19116-02-02",
+      "doc_type": "LN",
+      "filed": "",
+      "cat": "lien",
+      "cat_label": "Lien / Notice",
+      "owner": "",
+      "grantee": "",
+      "amount": 102990.0,
+      "legal": "Lot No. Forty- Five (45), Block \u201cO\u201d on a plat of East Pines by William R",
+      "prop_address": "2102 Bedford Way",
+      "prop_city": "Columbia",
+      "prop_state": "SC",
+      "prop_zip": "29209",
       "mail_address": "",
       "mail_city": "",
       "mail_state": "SC",
@@ -2359,7 +2457,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2381,7 +2479,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2403,7 +2501,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2425,7 +2523,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2447,7 +2545,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2469,7 +2567,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2491,7 +2589,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2513,7 +2611,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2535,7 +2633,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2557,7 +2655,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2579,7 +2677,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2601,7 +2699,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2623,7 +2721,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2645,7 +2743,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2667,7 +2765,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2689,7 +2787,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2711,7 +2809,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2733,7 +2831,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2755,7 +2853,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2777,7 +2875,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2799,7 +2897,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2821,7 +2919,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2843,7 +2941,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2865,7 +2963,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
       "flags": [],
       "score": 0
     },
@@ -2887,7 +2985,51 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-299/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/masters-sales-300/",
+      "flags": [],
+      "score": 0
+    },
+    {
+      "doc_num": "16909-07-03",
+      "doc_type": "LP",
+      "filed": "",
+      "cat": "preforeclosure",
+      "cat_label": "Lis Pendens",
+      "owner": "",
+      "grantee": "",
+      "amount": null,
+      "legal": "Lot 8A, Block D, on a plat of Woodfield prepared by McMillan Engineering Company and recorded in the RMC for Richland County in Plat Book 8 at Pages 281-284; and being more particularly shown delineated on a plat prepared for Sandra L",
+      "prop_address": "2115 Dupont Drive",
+      "prop_city": "Columbia",
+      "prop_state": "SC",
+      "prop_zip": "29223",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
+      "flags": [],
+      "score": 0
+    },
+    {
+      "doc_num": "2026CP4000369",
+      "doc_type": "NOFC",
+      "filed": "",
+      "cat": "preforeclosure",
+      "cat_label": "Notice of Foreclosure",
+      "owner": "Trevian Kairei Sweeney",
+      "grantee": "NOTICE IS HEREBY GIVEN that an action will be commenced in this Court upon the Complaint of the above-named Plaintiff ag",
+      "amount": null,
+      "legal": "",
+      "prop_address": "737 Plantation Road",
+      "prop_city": "Lancaster",
+      "prop_state": "SC",
+      "prop_zip": "29720",
+      "mail_address": "",
+      "mail_city": "",
+      "mail_state": "SC",
+      "mail_zip": "",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -2909,7 +3051,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -2931,7 +3073,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -2953,7 +3095,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -2975,7 +3117,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -2997,7 +3139,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3019,7 +3161,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3041,7 +3183,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3063,7 +3205,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3085,7 +3227,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3107,7 +3249,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3129,7 +3271,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3151,7 +3293,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
@@ -3173,7 +3315,7 @@
       "mail_city": "",
       "mail_state": "SC",
       "mail_zip": "",
-      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1819/",
+      "clerk_url": "https://www.thecolumbiastar.com/articles/public-notices-1821/",
       "flags": [],
       "score": 0
     },
